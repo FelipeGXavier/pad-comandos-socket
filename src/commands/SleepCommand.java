@@ -11,7 +11,7 @@ public class SleepCommand extends CommandRequest {
         int delay = this.getDelayTime();
         System.out.println("Iniciando execução do comando Sleep com " + delay);
         Thread.sleep(this.getDelayTime());
-        System.out.println("Finalizado execução");
+        System.out.println("Finalizado execução do comando Sleep com " + delay);
     }
 
     private int getDelayTime() {

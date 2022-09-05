@@ -1,9 +1,7 @@
 package util;
 
-import commands.CommandArgs;
-import commands.CommandRequest;
-import commands.NewCommand;
-import commands.SleepCommand;
+import commands.*;
+import network.SocketServer;
 
 import java.util.List;
 
@@ -23,6 +21,8 @@ public class CommandArgsParser {
                 return new SleepCommand(commandArgs.getOptions());
             case "new":
                 return new NewCommand(commandArgs.getOptions());
+            case "wait":
+                return new WaitCommand(commandArgs.getOptions(), SocketServer.threadStorage);
             default:
                 return null;
         }
