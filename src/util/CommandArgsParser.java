@@ -23,6 +23,8 @@ public class CommandArgsParser {
                 return new NewCommand(commandArgs.getOptions());
             case "wait":
                 return new WaitCommand(commandArgs.getOptions(), SocketServer.threadStorage);
+            case "notify":
+                return new NotifyCommand(commandArgs.getOptions(), SocketServer.threadStorage);
             default:
                 return null;
         }
