@@ -3,15 +3,16 @@ package util;
 import commands.*;
 import network.SocketServer;
 
+import java.net.Socket;
 import java.util.List;
 
 public class CommandArgsParser {
 
-    public CommandRequest getCommand(String args) {
-        return this.parseArguments(args);
+    public CommandRequest getCommand(String args, Socket socket) {
+        return this.parseArguments(args, socket);
     }
 
-    private CommandRequest parseArguments(String args) {
+    private CommandRequest parseArguments(String args, Socket socket) {
         CommandArgs commandArgs = this.getValidCommand(args);
         if (args.isEmpty() || commandArgs == null) {
             throw new RuntimeException("Invalid Command");
@@ -20,7 +21,7 @@ public class CommandArgsParser {
             case "sleep":
                 return new SleepCommand(commandArgs.getOptions());
             case "new":
-                return new NewCommand(commandArgs.getOptions());
+                return new NewCommand(commandArgs.getOptions(), socket);
             case "wait":
                 return new WaitCommand(commandArgs.getOptions(), SocketServer.threadStorage);
             case "notify":

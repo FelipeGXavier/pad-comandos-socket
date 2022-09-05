@@ -22,7 +22,7 @@ public class RequestHandler implements Runnable {
             ObjectInputStream ois = new ObjectInputStream(this.socket.getInputStream());
             String command = (String) ois.readObject();
             System.out.println("Command Received: " + command);
-            this.commandArgsParser.getCommand(command).execute();
+            this.commandArgsParser.getCommand(command, this.socket).execute();
             ObjectOutputStream oos = new ObjectOutputStream(this.socket.getOutputStream());
             //oos.writeObject(tape);
             ois.close();
