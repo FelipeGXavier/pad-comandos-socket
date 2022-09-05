@@ -25,9 +25,12 @@ public class SocketClient {
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
             oos.writeObject(command);
-            ois = new ObjectInputStream(socket.getInputStream());
-            String message = (String) ois.readObject();
-            System.out.println("Message: " + message);
+            // Apenas o comando 'new' tem um resposta do socket
+            if (command.toLowerCase().contains("new")) {
+                ois = new ObjectInputStream(socket.getInputStream());
+                String message = (String) ois.readObject();
+                System.out.println("Message: " + message);
+            }
         }
         assert oos != null;
         oos.close();

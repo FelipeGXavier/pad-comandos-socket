@@ -1,9 +1,10 @@
 package network;
 
+import commands.CommandRequest;
+import commands.NewCommand;
 import util.CommandArgsParser;
 
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class RequestHandler implements Runnable {
@@ -22,12 +23,12 @@ public class RequestHandler implements Runnable {
             ObjectInputStream ois = new ObjectInputStream(this.socket.getInputStream());
             String command = (String) ois.readObject();
             System.out.println("Command Received: " + command);
-            this.commandArgsParser.getCommand(command, this.socket).execute();
-            ObjectOutputStream oos = new ObjectOutputStream(this.socket.getOutputStream());
-            //oos.writeObject(tape);
-            ois.close();
-            oos.close();
-            this.socket.close();
+            CommandRequest commandRequest = this.commandArgsParser.getCommand(command, this.socket);
+            commandRequest.execute();
+            if (!(commandRequest instanceof NewCommand)) {
+                this.socket.close();
+                ois.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
