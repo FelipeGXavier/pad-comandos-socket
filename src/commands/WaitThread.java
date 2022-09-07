@@ -1,5 +1,7 @@
 package commands;
 
+import util.ThreadStorage;
+
 public class WaitThread extends Thread {
 
     private final String name;

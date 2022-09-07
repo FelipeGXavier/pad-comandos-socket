@@ -11,6 +11,10 @@ public class ThreadStorage {
         this.storage = new ConcurrentHashMap<>();
     }
 
+    public Map<String, Thread> getStorage() {
+        return storage;
+    }
+
     public boolean addThread(String name, Thread thread) {
         if (this.storage.get(name) != null) {
             return false;
