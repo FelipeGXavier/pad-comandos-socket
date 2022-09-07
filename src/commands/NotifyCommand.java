@@ -15,12 +15,14 @@ public class NotifyCommand extends CommandRequest{
     public void execute() throws Exception {
         String nome = this.options[0];
 
-        Thread thread = this.threadStorage.get(nome);
-
-        System.out.println("Resumindo thread "+nome);
-
-        synchronized (thread){
-            thread.notify();
+        try{
+            Thread thread = this.threadStorage.get(nome);
+            synchronized (thread){
+                thread.notify();
+            }
+            System.out.println("Resumindo thread "+nome);
+        }catch (NullPointerException e){
+            System.out.println("Thread "+ nome + " inexistente.");
         }
     }
 }
