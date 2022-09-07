@@ -22,7 +22,7 @@ public class NotifyCommand extends CommandRequest{
             }
             System.out.println("Resumindo thread "+nome);
         }catch (NullPointerException e){
-            System.out.println("Thread "+ nome + " inexistente.");
+            System.out.println("Thread ["+ nome + "] inexistente.");
         }
     }
 }
