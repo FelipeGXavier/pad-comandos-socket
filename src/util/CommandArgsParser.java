@@ -5,6 +5,7 @@ import network.SocketServer;
 
 import java.net.Socket;
 import java.util.List;
+import java.util.Objects;
 
 public class CommandArgsParser {
 
@@ -35,6 +36,10 @@ public class CommandArgsParser {
         List<String> validCommandNames = List.of("new", "sleep", "wait", "notify");
         String[] commandData = args.split(" ");
         String firstArg = commandData[0];
+
+        if(commandData.length == 1){
+            throw new RuntimeException("Incomplete Command");
+        }
         if (firstArg == null || !validCommandNames.contains(firstArg.toLowerCase())) {
             return null;
         }
